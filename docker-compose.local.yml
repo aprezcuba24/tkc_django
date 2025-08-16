@@ -1,0 +1,41 @@
+volumes:
+  tkc_api_rest_local_postgres_data: {}
+  tkc_api_rest_local_postgres_data_backups: {}
+
+
+services:
+  django:
+    build:
+      context: .
+      dockerfile: ./compose/local/django/Dockerfile
+    image: tkc_api_rest_local_django
+    container_name: tkc_api_rest_local_django
+    depends_on:
+      - postgres
+    volumes:
+      - .:/app:z
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+    ports:
+      - '9000:8000'
+    command: /start
+    networks:
+      - tkc_demo
+
+  postgres:
+    build:
+      context: .
+      dockerfile: ./compose/production/postgres/Dockerfile
+    image: tkc_api_rest_production_postgres
+    container_name: tkc_api_rest_local_postgres
+    volumes:
+      - tkc_api_rest_local_postgres_data:/var/lib/postgresql/data
+      - tkc_api_rest_local_postgres_data_backups:/backups
+    env_file:
+      - ./.envs/.local/.postgres
+    networks:
+      - tkc_demo
+
+networks:
+  tkc_demo:
