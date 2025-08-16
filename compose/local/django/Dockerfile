@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   build-essential \
   curl \
   gcc \
+  python3-dev default-libmysqlclient-dev build-essential pkg-config \
   # psycopg dependencies
   libpq-dev
 
@@ -37,7 +38,7 @@ WORKDIR ${APP_HOME}
 
 
 # devcontainer dependencies and utils
-RUN apt-get update && apt-get install --no-install-recommends -y curl gcc \
+RUN apt-get update && apt-get install --no-install-recommends -y curl gcc python3-dev default-libmysqlclient-dev build-essential pkg-config \
   sudo git bash-completion nano ssh
 
 # Create devcontainer user and add it to sudoers
@@ -56,6 +57,7 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
   gettext \
   curl \
   gcc \
+  python3-dev default-libmysqlclient-dev build-essential pkg-config \
   # cleaning up unused files
   && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
   && rm -rf /var/lib/apt/lists/*

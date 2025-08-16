@@ -46,8 +46,24 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL")}
-DATABASES["default"]["ATOMIC_REQUESTS"] = True
+# DATABASES = {"default": env.db("DATABASE_URL")}
+
+# DATABASES = {"default": "mysql://root:rootpassword@db_server:3306/tkc_api_rest?serverVersion=11.2.4-MariaDB&charset=utf8mb4"}
+# DATABASES["default"]["ATOMIC_REQUESTS"] = True
+
+# TODO: Configurar esto en variables de entorno, por ahora para andar rápido dejarlo así.
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "tkc_api_rest",
+        "USER":"root",
+        "PASSWORD":"rootpassword",
+        "HOST":"db_server",
+        "PORT":"3306",
+        "ATOMIC_REQUESTS": True,
+    }
+}
+
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
