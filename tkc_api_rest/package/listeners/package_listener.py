@@ -5,6 +5,7 @@ from tkc_api_rest.driver.services import create_driver
 from tkc_api_rest.orders.services import create_orders
 from tkc_api_rest.orders.models import Order
 from tkc_api_rest.products.services import create_products
+from django.db import transaction
 
 
 def create_product_by_orders(orders: list, order_instances: list[Order]):
@@ -20,9 +21,10 @@ class PackageListener(EventListener):
 
     def handle(self, event):
         if event.event_type == "PACKAGE_DISTRIBUTION":
-            package = create_package(
-                event.package_code, event.created_at, event.weight, event.volume
-            )
-            driver = create_driver(event.driver["driver_id"], event.driver["name"])
-            orders = create_orders(package, event.orders)
-            create_product_by_orders(event.orders, orders)
+            with transaction.atomic():
+                package = create_package(
+                    event.package_code, event.created_at, event.weight, event.volume
+                )
+                driver = create_driver(event.driver["driver_id"], event.driver["name"])
+                orders = create_orders(package, event.orders)
+                create_product_by_orders(event.orders, orders)
