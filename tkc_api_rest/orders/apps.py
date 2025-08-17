@@ -2,5 +2,5 @@ from django.apps import AppConfig
 
 
 class OrdersConfig(AppConfig):
-    default_auto_field = 'django.db.models.BigAutoField'
-    name = 'tkc_api_rest.orders'
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "tkc_api_rest.orders"

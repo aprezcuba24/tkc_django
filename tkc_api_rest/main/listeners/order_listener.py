@@ -1,6 +1,7 @@
 from events import EventListener
 from ..events import OrderEvent
 
+
 class OrderListener(EventListener):
     listensFor = [
         OrderEvent,

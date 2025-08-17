@@ -1,7 +1,6 @@
 # ruff: noqa: ERA001, E501
 """Base settings to build other settings files upon."""
 
-
 from pathlib import Path
 
 import environ
@@ -56,10 +55,10 @@ DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
         "NAME": "tkc_api_rest",
-        "USER":"root",
-        "PASSWORD":"rootpassword",
-        "HOST":"db_server",
-        "PORT":"3306",
+        "USER": "root",
+        "PASSWORD": "rootpassword",
+        "HOST": "db_server",
+        "PORT": "3306",
         "ATOMIC_REQUESTS": True,
     }
 }

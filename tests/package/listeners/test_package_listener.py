@@ -2,6 +2,7 @@ import pytest
 from tkc_api_rest.package.events import PackageEvent
 from tkc_api_rest.package.models import Package
 
+
 @pytest.mark.django_db
 def test_package_listener():
     PackageEvent.Dispatch(
@@ -18,13 +19,13 @@ def test_package_listener():
                         "product_id": 1,
                         "name": "Product 1",
                     }
-                ]
+                ],
             }
         ],
         driver={
             "driver_id": 1,
             "name": "John Doe",
-        }
+        },
     )
     package = Package.objects.get(code="123")
     assert package is not None
