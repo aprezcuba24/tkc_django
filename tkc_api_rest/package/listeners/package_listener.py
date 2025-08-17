@@ -7,4 +7,5 @@ class PackageListener(EventListener):
     ]
 
     def handle(self, event):
-        print("Package created: ", event.event_type, event.data)
+        if event.event_type == "PACKAGE_DISTRIBUTION":
+            print("Package created: ", event.event_type)
