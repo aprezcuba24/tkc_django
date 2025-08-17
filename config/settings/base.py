@@ -104,6 +104,7 @@ LOCAL_APPS = [
     "tkc_api_rest.users",
     "tkc_api_rest.main",
     "tkc_api_rest.package",
+    "tkc_api_rest.driver",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
