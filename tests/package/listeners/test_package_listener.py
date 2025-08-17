@@ -2,6 +2,7 @@ import pytest
 from tkc_api_rest.package.events import PackageEvent
 from tkc_api_rest.package.models import Package
 from tkc_api_rest.driver.models import Driver
+from tkc_api_rest.orders.models import Order
 
 
 @pytest.mark.django_db
@@ -15,6 +16,9 @@ def test_package_listener():
         orders=[
             {
                 "order_code": "123",
+                "created_at": "2025-08-17 16:06:22",
+                "weight": 10,
+                "volume": 10,
                 "products": [
                     {
                         "product_id": 1,
@@ -32,3 +36,4 @@ def test_package_listener():
     driver = Driver.objects.get(external_id=1)
     assert package is not None
     assert driver is not None
+    assert len(Order.objects.filter(package=package)) == 1
