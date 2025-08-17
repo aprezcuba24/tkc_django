@@ -1,6 +1,7 @@
 import pytest
 from tkc_api_rest.package.events import PackageEvent
 from tkc_api_rest.package.models import Package
+from tkc_api_rest.driver.models import Driver
 
 
 @pytest.mark.django_db
@@ -28,4 +29,6 @@ def test_package_listener():
         },
     )
     package = Package.objects.get(code="123")
+    driver = Driver.objects.get(external_id=1)
     assert package is not None
+    assert driver is not None

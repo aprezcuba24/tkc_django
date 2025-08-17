@@ -1,6 +1,7 @@
 from events import EventListener
 from ..events import PackageEvent
 from ..services import create_package
+from tkc_api_rest.driver.services import create_driver
 
 
 class PackageListener(EventListener):
@@ -13,4 +14,5 @@ class PackageListener(EventListener):
             package = create_package(
                 event.package_code, event.created_at, event.weight, event.volume
             )
-            print("Package created: ", package)
+            driver = create_driver(event.driver["driver_id"], event.driver["name"])
+            print("Package created: ", package, driver)
