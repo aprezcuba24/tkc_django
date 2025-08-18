@@ -12,3 +12,6 @@ class PackageViewSet(RetrieveModelMixin, ListModelMixin, GenericViewSet):
     serializer_class = PackageSerializer
     queryset = Package.objects.all()
     lookup_field = "pk"
+
+    def get_queryset(self, *args, **kwargs):
+        return super().get_queryset(*args, **kwargs).select_related("driver")
