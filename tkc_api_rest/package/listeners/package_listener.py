@@ -22,9 +22,13 @@ class PackageListener(EventListener):
     def handle(self, event):
         if event.event_type == "PACKAGE_DISTRIBUTION":
             with transaction.atomic():
-                package = create_package(
-                    event.package_code, event.created_at, event.weight, event.volume
-                )
                 driver = create_driver(event.driver["driver_id"], event.driver["name"])
+                package = create_package(
+                    package_code=event.package_code,
+                    created_at=event.created_at,
+                    weight=event.weight,
+                    volume=event.volume,
+                    driver=driver,
+                )
                 orders = create_orders(package, event.orders)
                 create_product_by_orders(event.orders, orders)

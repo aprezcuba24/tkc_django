@@ -57,6 +57,7 @@ def test_package_listener():
     driver = Driver.objects.get(external_id=1)
     assert package is not None
     assert driver is not None
+    assert package.driver == driver
     assert len(Order.objects.filter(package=package)) == 2
     assert len(Product.objects.filter(order=Order.objects.get(code="123"))) == 2
     assert len(Product.objects.filter(order=Order.objects.get(code="124"))) == 2
