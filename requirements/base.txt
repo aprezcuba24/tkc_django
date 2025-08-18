@@ -10,6 +10,7 @@ mysqlclient==2.2.7
 celery[redis]>=5.3,<6.0
 redis>=5.0.0
 django-event-system==1.0.1
+djangorestframework-simplejwt==5.5.1
 
 # Django
 # ------------------------------------------------------------------------------
