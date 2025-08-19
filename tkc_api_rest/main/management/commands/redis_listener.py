@@ -36,10 +36,16 @@ class Command(BaseCommand):
                             r.xdel(stream_key, message_id)
                             last_id = message_id
                             event_type = body.pop("event_type")
-                            event = EVENTS_BY_TYPES[event_type.upper()]
-                            event.Dispatch(event_type.upper(), **body)
+                            self.handle_event(event_type.upper(), **body)
                 else:
                     time.sleep(0.1)
             except KeyboardInterrupt:
                 print("Parando consumidor...")
                 break
+
+    def handle_event(self, event_type, **kwargs):
+        event = EVENTS_BY_TYPES[event_type.upper()]
+        try:
+            event.Dispatch(event_type.upper(), **kwargs)
+        except Exception as e:
+            print("Error al procesar evento:", e)
